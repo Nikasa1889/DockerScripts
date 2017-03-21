@@ -7,6 +7,6 @@ sudo docker run -d \
   -p 8126:8126\
   -v /home/nikasa/Graphite/.htpasswd:/etc/nginx/.htpasswd\
   -v /home/nikasa/Graphite/data:/opt/graphite/storage\
-  -v /home/nikasa/Graphite/configs:/opt/graphite/conf\
+#  -v /home/nikasa/Graphite/configs:/opt/graphite/conf\
   -v /home/nikasa/Graphite/statsd:/opt/statsd\
   sitespeedio/graphite
