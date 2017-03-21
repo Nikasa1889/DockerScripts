@@ -1,4 +1,4 @@
-sudo docker run -d \
+sudo docker run -i -d \
   --name graphite \
   -p 8080:80\
   -p 2003:2003\
@@ -8,6 +8,6 @@ sudo docker run -d \
   -p 8126:8126\
   -v /home/nikasa/Graphite/.htpasswd:/etc/nginx/.htpasswd\
   -v /home/nikasa/Graphite/data/whisper:/opt/graphite/storage/whisper\
-  -v /home/nikasa/Graphite/storage-schemas.conf:/opt/graphite/conf/storage-schemas.conf\
   nikasa/graphite
   #-v /home/nikasa/Graphite/statsd:/opt/statsd\
+  #-v /home/nikasa/Graphite/storage-schemas.conf:/opt/graphite/conf/storage-schemas.conf\
