@@ -1,0 +1,35 @@
+version: '2'
+services:
+  tensorflow:
+    image: gcr.io/tensorflow/tensorflow:latest-gpu
+    ports:
+      - "8888:8888"
+      - "6006:6006"
+      - "4000:22"
+    volumes:
+      - /home/nikasa/Docker/notebooks:/notebooks
+      - /home/nikasa/Docker/mycert.pem:/home/jovyan/.local/share/jupyter/notebook.pem
+    environment:
+      - "USE_HTTPS=yes"
+    command: [/run_jupyter.sh, "--NotebookApp.password='sha1:446f44ac0d61:4b45189fae99b1ff67555a4d91ddf6d7af77d84f'"]
+  opengym:
+    image: nikasa/rl_opengym
+    ports:
+      - "8887:8888"
+      - "6005:6006"
+    volumes:
+      - /home/nikasa/Docker/reinforcement-learning:/notebooks
+      - /home/nikasa/Docker/mycert.pem:/home/jovyan/.local/share/jupyter/notebook.pem
+    environment:
+      - "USE_HTTPS=yes"
+    command: [/run_jupyter.sh, "--NotebookApp.password='sha1:446f44ac0d61:4b45189fae99b1ff67555a4d91ddf6d7af77d84f'"]
+  rstudio:
+    image: rocker/hadleyverse
+    ports:
+      - "8787:8787"
+    volumes:
+      - "/home/nikasa/Docker/KDI_Statoil:/home/nikasa"
+    environment:
+      - "USER=nikasa"
+      - "PASSWORD=wordpass123"
+      - "GRANT_SUDO=yes"
