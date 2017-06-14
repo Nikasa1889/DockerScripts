@@ -1,7 +1,7 @@
 version: '2'
 services:
   tensorflow:
-    image: gcr.io/tensorflow/tensorflow:latest-gpu
+    image: nikasa/tensorflow
     ports:
       - "8888:8888"
       - "6006:6006"
@@ -24,12 +24,26 @@ services:
       - "USE_HTTPS=yes"
     command: [/run_jupyter.sh, "--NotebookApp.password='sha1:446f44ac0d61:4b45189fae99b1ff67555a4d91ddf6d7af77d84f'"]
   rstudio:
-    image: rocker/hadleyverse
+    image: nikasa/rstudio
     ports:
       - "8787:8787"
     volumes:
-      - "/home/nikasa/Docker/KDI_Statoil:/home/nikasa"
+      - "/home/nikasa/Docker/rstudio:/home/nikasa"
     environment:
       - "USER=nikasa"
       - "PASSWORD=wordpass123"
       - "GRANT_SUDO=yes"
+  openface:
+    image: nikasa/openface:latest
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    volumes:
+      - "/home/nikasa/Docker/openface:/root/openface"
+      - "/dev/video0:/dev/video0"
+      - "/dev/video1:/dev/video1"
+    privileged: true
+    stdin_open: true
+    tty: true
+    command:
+      - "/bin/bash"
